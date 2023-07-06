@@ -1,10 +1,12 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { selectDisplay } from '../redux/slices/displayCountrySlice'
+import { setShowModal, setCloseModal } from '../redux/slices/modalSlice'
 
 const Weather = () => {
   const [weather, setWeather] = useState()
+  const dispatch = useDispatch()
   let display = useSelector(selectDisplay)
   let latitude = display.capitalInfo.latlng[0]
   let longitude = display.capitalInfo.latlng[1]
@@ -12,6 +14,7 @@ const Weather = () => {
   // PASTE RAPIDAPI CODE SNIPPET IN A USEEFFECT HERE
   // ------------------------------------
   useEffect(() => {
+    dispatch(setShowModal())
     const options = {
       method: 'GET',
       url: 'https://weatherapi-com.p.rapidapi.com/current.json',
@@ -26,9 +29,11 @@ const Weather = () => {
       .then(res => {
         console.log(res.data)
         setWeather(res.data)
+        dispatch(setCloseModal())
       })
       .catch(err => {
         console.log('error getWeather', err)
+        dispatch(setCloseModal())
       })
   }, [])
   return (
@@ -60,5 +65,5 @@ const Weather = () => {
   )
 }
 
+export default Weather
 
-export default Weather;

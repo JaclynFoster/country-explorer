@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 
 const Overview = () => {
   let currentDisplay = useSelector(selectDisplay)
+  let keys = Object.keys(currentDisplay.languages)
   return (
     <div className="stack">
       <h1>{currentDisplay.name.official}</h1>
@@ -66,15 +67,9 @@ const Overview = () => {
         </tr>
         <tr>
           <th>Languages:</th>
-          <td>{currentDisplay.languages.eng}</td>
+          <td>{keys}</td>
         </tr>
-        <tr>
-          <th>Currencies:</th>
-          <td>
-            {currentDisplay.currencies.USD.symbol}{' '}
-            {currentDisplay.currencies.USD.name}
-          </td>
-        </tr>
+
         <tr>
           <th>Maps:</th>
           <td>{currentDisplay.maps.googleMaps}</td>
@@ -93,4 +88,5 @@ const Overview = () => {
 }
 
 export default Overview
+
 

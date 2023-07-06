@@ -179,3 +179,14 @@ td {
 th {
     padding: 5px;
 }
+
+.modal {
+    padding: 50px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
+
+.loading {
+    width: 100%;
+    color: whitesmoke;
+}

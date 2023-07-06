@@ -10,6 +10,7 @@ import {
   selectDisplay,
   deleteDisplayCountry
 } from '../redux/slices/displayCountrySlice'
+import { setShowModal, setCloseModal } from '../redux/slices/modalSlice'
 
 const Header = () => {
   const [input, setInput] = useState()
@@ -32,15 +33,18 @@ const Header = () => {
         />
         <button
           onClick={() => {
+            dispatch(setShowModal())
             axios
               .get(`https://restcountries.com/v3.1/name/${input}`)
               .then(res => {
                 dispatch(deleteDisplayCountry())
                 dispatch(deletePotentialCountries())
                 dispatch(setPotentialCountries(res.data))
+                dispatch(setCloseModal())
                 console.log(res.data)
               })
               .catch(err => {
+                dispatch(setCloseModal())
                 alert('No countries found that match your search!')
               })
           }}
@@ -53,4 +57,5 @@ const Header = () => {
 }
 
 export default Header
+
 
